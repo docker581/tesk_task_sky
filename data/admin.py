@@ -8,15 +8,15 @@ class PatientAdmin(admin.ModelAdmin):
 
 
 class CaseAdmin(admin.ModelAdmin):
-    list_display = ['patient', 'date_begin', 'date_end', 'result', 'id']
+    list_display = ['id', 'patient', 'date_begin', 'date_end', 'result']
 
 
 class DocumentAdmin(admin.ModelAdmin):
-    list_display = ['patient', 'case', 'title', 'date', 'id']
+    list_display = ['title', 'patient', 'case', 'date', 'id']
 
 
 class BodyAdmin(admin.ModelAdmin):
-    list_display = ['document', 'content']
+    list_display = ['document', 'content', 'id']
 
 
 admin.site.register(Patient, PatientAdmin)

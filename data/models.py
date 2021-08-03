@@ -19,10 +19,10 @@ class Patient(models.Model):
 
     class Meta:
         verbose_name = 'Пациент'
-        verbose_name_plural = 'Пациенты'
+        verbose_name_plural = '1. Пациенты'
 
     def __str__(self):
-        return f'Пациент {self.fio}'
+        return self.fio
 
 
 class Case(models.Model):
@@ -52,7 +52,7 @@ class Case(models.Model):
 
     class Meta:
         verbose_name = 'Случай лечения'
-        verbose_name_plural = 'Случаи лечения'
+        verbose_name_plural = '2. Случаи лечения'
 
     def __str__(self):
         return f'Лечение пациента {self.patient}'
@@ -76,7 +76,7 @@ class Document(models.Model):
 
     class Meta:
         verbose_name = 'Медицинский документ'
-        verbose_name_plural = 'Медицинские документы'
+        verbose_name_plural = '3. Медицинские документы'
 
     def __str__(self):
         return f'Документ {self.title}'
@@ -88,11 +88,11 @@ class Body(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Документ',   
     )    
-    content = jsonfield.JSONField()
+    content = jsonfield.JSONField(verbose_name='Контент')
 
     class Meta:
         verbose_name = 'Тело документа'
-        verbose_name_plural = 'Тело документов'
+        verbose_name_plural = '4. Тело документов'
 
     def __str__(self):
         return f'Тело документа {self.document}'    
