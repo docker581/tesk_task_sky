@@ -1,5 +1,3 @@
-from django.shortcuts import get_object_or_404
-
 from rest_framework import mixins, viewsets
 from rest_framework import response
 
@@ -25,9 +23,21 @@ class CaseViewSet(
 ):
     serializer_class = CaseSerializer
     queryset = Case.objects.all()
+    filterset_fields = ['patient']
+    # если понадобится фильтрация по ФИО пациента, а не по id
+    # filterset_fields = ['patient__fio']
 
     # def retrieve(self, request, pk=None):
-    #     queryset = Document.objects.all()
-    #     user = get_object_or_404(queryset, pk=pk)
-    #     serializer = DocumentSerializer
+    #     serializer = DocumentSerializer(many=True)
     #     return response.Response(serializer.data)
+
+
+class DocumentViewSet(
+    mixins.RetrieveModelMixin, 
+    mixins.CreateModelMixin, 
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
+    serializer_class = DocumentSerializer
+    queryset = Document.objects.all()
+    filter_fields = ['patient', 'case']

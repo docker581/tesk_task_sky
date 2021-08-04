@@ -10,8 +10,11 @@ class PatientSerializer(serializers.ModelSerializer):
 
 
 class CaseSerializer(serializers.ModelSerializer):
+    # если понадобится выдача ФИО пациента вместо id
+    # patient = serializers.ReadOnlyField(source='patient.fio')  
+
     class Meta:
-        fields = '__all__'
+        fields = ['id', 'patient', 'date_begin', 'date_end', 'result']
         model = Case
 
 
