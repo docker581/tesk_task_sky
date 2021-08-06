@@ -11,10 +11,22 @@ class PatientSerializer(serializers.ModelSerializer):
 
 class CaseSerializer(serializers.ModelSerializer):
     # если понадобится выдача ФИО пациента вместо id
-    # patient = serializers.ReadOnlyField(source='patient.fio')  
+    # patient = serializers.ReadOnlyField(source='patient.fio')     
 
     class Meta:
         fields = ['id', 'patient', 'date_begin', 'date_end', 'result']
+        model = Case
+
+
+class DetailCaseSerializer(serializers.ModelSerializer):
+    docs = serializers.SerializerMethodField()
+
+    def get_docs(self, object):  # массив док-ов, связанных с данным случаем
+        docs = list(Document.objects.filter(case=object).values())
+        return docs
+        
+    class Meta:
+        fields = ['id', 'docs', 'patient', 'date_begin', 'date_end', 'result']
         model = Case
 
 
