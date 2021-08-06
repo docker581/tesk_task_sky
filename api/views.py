@@ -2,7 +2,12 @@ from rest_framework import mixins, viewsets
 from rest_framework import response
 
 from data.models import Patient, Case, Document
-from .serializers import PatientSerializer, CaseSerializer, DocumentSerializer, DetailCaseSerializer
+from .serializers import (
+    PatientSerializer, 
+    CaseSerializer, 
+    DocumentSerializer, 
+    DetailCaseSerializer,
+)
 
 
 class PatientViewSet(
@@ -16,6 +21,7 @@ class PatientViewSet(
 
 
 class CaseViewSet(
+    mixins.RetrieveModelMixin,
     mixins.CreateModelMixin, 
     mixins.ListModelMixin,
     viewsets.GenericViewSet,
@@ -26,10 +32,10 @@ class CaseViewSet(
     # если понадобится фильтрация по ФИО пациента, а не по id
     # filterset_fields = ['patient__fio']
 
-
-class DetailCaseViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
-    serializer_class = DetailCaseSerializer
-    queryset = Case.objects.all()
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = DetailCaseSerializer(instance)
+        return response.Response(serializer.data)
 
 
 class DocumentViewSet(

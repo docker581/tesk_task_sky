@@ -21,7 +21,7 @@ class CaseSerializer(serializers.ModelSerializer):
 class DetailCaseSerializer(serializers.ModelSerializer):
     docs = serializers.SerializerMethodField()
 
-    def get_docs(self, object):  # массив док-ов, связанных с данным случаем
+    def get_docs(self, object):  # массив док-ов, связанных со случаем
         docs = list(Document.objects.filter(case=object).values())
         return docs
         
