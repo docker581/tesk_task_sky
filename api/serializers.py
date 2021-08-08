@@ -22,7 +22,7 @@ class DetailCaseSerializer(serializers.ModelSerializer):
     docs = serializers.SerializerMethodField()
 
     def get_docs(self, object):  # массив док-ов, связанных со случаем
-        docs = list(Document.objects.filter(case=object).values())
+        docs = Document.objects.filter(case=object).values()
         return docs
         
     class Meta:
@@ -36,7 +36,13 @@ class DocumentSerializer(serializers.ModelSerializer):
         model = Document
 
 
-class BodySerializer(serializers.ModelSerializer):
+class DetailDocumentSerializer(serializers.ModelSerializer):
+    # body = serializers.SerializerMethodField()
+
+    # def get_body(self, object):  # получение тела документа
+    #     body = Body.objects.get(document=object).__dict__
+    #     return body['content']
+
     class Meta:
-        fields = '__all__'
-        model = Body
+        fields = ['id', 'body', 'patient', 'case', 'title', 'date']
+        model = Document

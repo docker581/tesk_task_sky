@@ -86,6 +86,7 @@ class Body(models.Model):
     document = models.OneToOneField(
         Document,
         on_delete=models.CASCADE,
+        related_name='body',
         verbose_name='Документ',   
     )    
     content = jsonfield.JSONField(verbose_name='Контент')
