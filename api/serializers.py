@@ -5,8 +5,8 @@ from data.models import Patient, Case, Document, Body
 
 class PatientSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = '__all__'
         model = Patient
+        fields = '__all__'      
 
 
 class CaseSerializer(serializers.ModelSerializer):
@@ -14,8 +14,8 @@ class CaseSerializer(serializers.ModelSerializer):
     # patient = serializers.ReadOnlyField(source='patient.fio')     
 
     class Meta:
-        fields = ['id', 'patient', 'date_begin', 'date_end', 'result']
         model = Case
+        fields = ['id', 'patient', 'date_begin', 'date_end', 'result']       
 
 
 class DetailCaseSerializer(serializers.ModelSerializer):
@@ -32,17 +32,20 @@ class DetailCaseSerializer(serializers.ModelSerializer):
 
 class DocumentSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = '__all__'
         model = Document
+        fields = '__all__'       
 
 
 class DetailDocumentSerializer(serializers.ModelSerializer):
-    # body = serializers.SerializerMethodField()
+    body = serializers.SerializerMethodField()
 
-    # def get_body(self, object):  # получение тела документа
-    #     body = Body.objects.get(document=object).__dict__
-    #     return body['content']
+    def get_body(self, object):  # получение тела документа
+        body = Body.objects.get(document=object).__dict__
+        return body['content']
 
     class Meta:
-        fields = ['id', 'body', 'patient', 'case', 'title', 'date']
         model = Document
+        fields = ['id', 'body', 'patient', 'case', 'title', 'date']
+        related_fields = 'body'
+
+    body = serializers.JSONField(source='body.content')       

@@ -50,21 +50,6 @@ class DocumentViewSet(
     queryset = Document.objects.all()
     filter_fields = ['patient', 'case']
 
-    def create(self, request, *args, **kwargs):
-        serializer = DetailDocumentSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return response.Response(
-            serializer.data,
-            status=status.HTTP_201_CREATED,
-            headers=headers,
-        )
-
-    # def perform_create(self, serializer):
-    #     content = self.kwargs.get('body')
-    #     Body.create(document=)
-
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = DetailDocumentSerializer(instance)
