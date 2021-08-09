@@ -45,7 +45,4 @@ class DetailDocumentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Document
-        fields = ['id', 'body', 'patient', 'case', 'title', 'date']
-        related_fields = 'body'
-
-    body = serializers.JSONField(source='body.content')       
+        fields = ['id', 'body', 'patient', 'case', 'title', 'date']     
