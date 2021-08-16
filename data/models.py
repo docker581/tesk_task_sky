@@ -12,7 +12,7 @@ class Patient(models.Model):
     fio = models.CharField(max_length=100, verbose_name='ФИО')
     birth_date = models.DateField(verbose_name='Дата рождения')
     gender = models.CharField(
-        max_length=50, 
+        max_length=50,
         choices=PatientGender.choices,
         verbose_name='Пол',
     )
@@ -38,15 +38,15 @@ class Case(models.Model):
     )
     date_begin = models.DateField(verbose_name='Дата начала')
     date_end = models.DateField(
-        blank=True, 
-        null=True, 
+        blank=True,
+        null=True,
         verbose_name='Дата окончания',
     )
     result = models.CharField(
-        max_length=50, 
+        max_length=50,
         choices=CaseResult.choices,
-        blank=True, 
-        null=True, 
+        blank=True,
+        null=True,
         verbose_name='Исход',
     )
 
@@ -60,15 +60,15 @@ class Case(models.Model):
 
 class Document(models.Model):
     patient = models.ForeignKey(
-        Patient, 
-        on_delete=models.CASCADE, 
+        Patient,
+        on_delete=models.CASCADE,
         verbose_name='Пациент',
     )
     case = models.ForeignKey(
-        Case, 
+        Case,
         on_delete=models.SET_NULL,
-        blank=True, 
-        null=True, 
+        blank=True,
+        null=True,
         verbose_name='Случай лечения',
     )
     title = models.CharField(max_length=50, verbose_name='Заголовок')
@@ -87,8 +87,8 @@ class Body(models.Model):
         Document,
         on_delete=models.CASCADE,
         related_name='body',
-        verbose_name='Документ',   
-    )    
+        verbose_name='Документ',
+    )
     content = jsonfield.JSONField(verbose_name='Контент')
 
     class Meta:
@@ -96,4 +96,4 @@ class Body(models.Model):
         verbose_name_plural = '4. Тело документов'
 
     def __str__(self):
-        return f'Тело документа {self.document}'    
+        return f'Тело документа {self.document}'

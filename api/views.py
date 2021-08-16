@@ -1,20 +1,19 @@
 from rest_framework import mixins, viewsets
 from rest_framework import response
-from rest_framework import status
 
-from data.models import Patient, Case, Document, Body
+from data.models import Patient, Case, Document
 from .serializers import (
-    PatientSerializer, 
+    PatientSerializer,
     CaseSerializer,
-    DetailCaseSerializer, 
-    DocumentSerializer, 
+    DetailCaseSerializer,
+    DocumentSerializer,
     DetailDocumentSerializer,
 )
 
 
 class PatientViewSet(
-    mixins.RetrieveModelMixin, 
-    mixins.CreateModelMixin, 
+    mixins.RetrieveModelMixin,
+    mixins.CreateModelMixin,
     mixins.ListModelMixin,
     viewsets.GenericViewSet,
 ):
@@ -24,7 +23,7 @@ class PatientViewSet(
 
 class CaseViewSet(
     mixins.RetrieveModelMixin,
-    mixins.CreateModelMixin, 
+    mixins.CreateModelMixin,
     mixins.ListModelMixin,
     viewsets.GenericViewSet,
 ):
@@ -41,8 +40,8 @@ class CaseViewSet(
 
 
 class DocumentViewSet(
-    mixins.RetrieveModelMixin, 
-    mixins.CreateModelMixin, 
+    mixins.RetrieveModelMixin,
+    mixins.CreateModelMixin,
     mixins.ListModelMixin,
     viewsets.GenericViewSet,
 ):
