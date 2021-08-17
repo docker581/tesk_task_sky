@@ -49,10 +49,10 @@ docker-compose exec web python manage.py createsuperuser
 
 ## Документация по API
 ```bash
-http://127.0.0.1:8000/swagger - Swagger
+http://127.0.0.1/swagger - Swagger
 ```
 ```bash
-http://127.0.0.1:8000/redoc - Redoc
+http://127.0.0.1/redoc - Redoc
 ```
 
 ## Логирование результатов API-запросов - DRF API Logger
