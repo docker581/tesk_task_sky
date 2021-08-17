@@ -46,6 +46,11 @@ docker-compose exec web python manage.py migrate --noinput
 docker-compose exec web python manage.py createsuperuser
 ```
 
+### Подключение статики
+```bash
+docker-compose exec web python manage.py collectstatic --no-input
+```
+
 ## Документация по API
 ```bash
 http://127.0.0.1/swagger - Swagger
