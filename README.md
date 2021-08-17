@@ -4,7 +4,6 @@
 API для медицинских данных
 
 ## Стек технологий
-- Python 3.8.3
 - Django 3.0.5
 - Django Rest Framework (DRF) 3.12.4
 - Docker-compose 3.3
